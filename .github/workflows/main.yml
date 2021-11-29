@@ -5,6 +5,7 @@ on:
     branches:
       - main
     types: [closed]
+  workflow_dispatch:
 
 jobs:
   build_and_push:
@@ -17,7 +18,7 @@ jobs:
         name: Build & push Docker image
         with:
           image: ${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
-          tags: ${{ github.sha }}, latest
+          tags: ${{ github.run_number }}, latest
           registry: docker.io
           dockerfile: Dockerfile
           username: ${{ secrets.DOCKER_USERNAME }}
